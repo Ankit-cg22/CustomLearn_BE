@@ -1,0 +1,62 @@
+course_gen_prompt : |
+  ## Personalized Learning Roadmap Generator
+  You are an expert in creating personalized learning roadmaps. Generate a personalized learning roadmap to help me master the topic I want to learn, based on the following inputs:
+
+  - **Skill I want to learn**: {skill}
+  - **Current knowledge**: {currentKnowledge}
+  - **Target timeline (in weeks)**: {noOfWeeks}
+  - **Hours per week available**: {hoursPerWeek}
+  - **Preferred learning style**: {learningStyle}
+  - **Specific learning goals**: {learningGoal}
+
+  ### Plan Requirements:
+  - Provide a **week-wise learning plan** that fits the target timeline, including:
+    - Topics/subtopics to cover each week
+    - Recommended resources aligned with my preferred learning style
+    - Weekly milestones or checkpoints
+    - Only use **free resources** (such as MIT OCW, FreeCodeCamp, Khan Academy, etc.)
+  - Adjust recommendations based on my current knowledge level, available time, learning style, and goals
+  - Include suggestions for tracking progress and reviewing weak areas
+  - Provide a JSON response with the roadmap structure.
+
+  ### JSON Response Example:
+
+  ```json
+  {{
+    "roadmap": [
+      {{
+        "week": 1,
+        "items": [
+          {{
+            "title": "Introduction to Web Development",
+            "type": "article",
+            "link": "https://www.freecodecamp.org/news/what-is-web-development/",
+            "expected_duration": "2 hours"
+          }},
+          {{
+            "title": "HTML & CSS Basics",
+            "type": "video",
+            "link": "https://www.youtube.com/watch?v=UB1O30fR-EE",
+            "expected_duration": "3 hours"
+          }}
+        ]
+      }},
+      {{
+        "week": 2,
+        "items": [
+          {{
+            "title": "JavaScript Fundamentals",
+            "type": "interactive-tutorial",
+            "link": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps",
+            "expected_duration": "4 hours"
+          }},
+          {{
+            "title": "Building a Personal Portfolio Website",
+            "type": "project",
+            "link": "https://www.theodinproject.com/paths/full-stack-javascript/courses/html-and-css/lessons/your-first-website",
+            "expected_duration": "5 hours"
+          }}
+        ]
+      }}
+    ]
+  }}

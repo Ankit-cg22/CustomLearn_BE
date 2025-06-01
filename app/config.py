@@ -1,0 +1,1 @@
+COURSE_GEN_PROMPT_NAME = "course_gen_prompt"
