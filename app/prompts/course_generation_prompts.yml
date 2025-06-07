@@ -18,11 +18,13 @@ course_gen_prompt : |
   - Adjust recommendations based on my current knowledge level, available time, learning style, and goals
   - Include suggestions for tracking progress and reviewing weak areas
   - Provide a JSON response with the roadmap structure.
+  - Provide a name for the course.
 
   ### JSON Response Example:
 
   ```json
   {{
+    "course_name": "Web Development Basics",
     "roadmap": [
       {{
         "week": 1,
