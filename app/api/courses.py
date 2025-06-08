@@ -3,6 +3,7 @@ from typing import List
 from app.models import CourseCreate, CourseUpdate, CourseInDB
 from app.db import courses_collection
 from bson import ObjectId
+from bson.errors import InvalidId
 
 router = APIRouter()
 
@@ -18,11 +19,22 @@ async def create_course(course: CourseCreate):
     course_dict["_id"] = str(result.inserted_id)
     return course_dict
 
-@router.get("/courses/{email}", response_model=List[CourseInDB])
+@router.get("/courses/coursesByEmail/{email}")
 async def get_courses(email: str):
     courses = await courses_collection.find({"email": email}).to_list(100)
-    return [course_helper(c) for c in courses]
+    return [{"_id": str(c["_id"]), "course_name": c.get("course_name")} for c in courses]
 
+@router.get("/courses/courseById/{_id}")
+async def get_course_by_id(_id: str):
+    try:
+        obj_id = ObjectId(_id)
+    except (InvalidId, TypeError):
+        raise HTTPException(status_code=400, detail="Invalid course id format")
+    course = await courses_collection.find_one({"_id": obj_id})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return course_helper(course)
+    
 @router.post("/courses/add", response_model=CourseInDB, status_code=status.HTTP_201_CREATED)
 async def add_course(course: CourseCreate):
     course_dict = course.model_dump()
