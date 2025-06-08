@@ -16,3 +16,6 @@ BASE_URL = os.getenv("BASE_URL")
 # database
 MONGODB_URI = os.getenv("MONGODB_URI")
 DB_NAME = os.getenv("DB_NAME")
+
+# model
+MODEL_ID = os.getenv("MODEL_ID", "llama-3.3-70b-versatile")

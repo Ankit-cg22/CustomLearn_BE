@@ -1,13 +1,13 @@
 import os
 from langchain_groq import ChatGroq
-from .config import CUSTOMLEARN_GROQ_API_KEY
+from .config import CUSTOMLEARN_GROQ_API_KEY , MODEL_ID
 
 class GroqClient:
     """
     Manages the instantiation and configuration of a ChatGroq language model client.
     """
 
-    def __init__(self, api_key: str = None, model: str = "llama-3.3-70b-versatile"):
+    def __init__(self, api_key: str = None, model: str = MODEL_ID):
         """
         Initializes the GroqClient with the specified API key and model.
 
